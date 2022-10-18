@@ -20,6 +20,20 @@ a {
   box-sizing: border-box;
 }
 
+.text-red{
+  color: #a61414;
+  font-weight: bolder;
+}
+
+.text-blue{
+  color: #033b86;
+  font-weight: bolder;
+}
+
+.bg-g{
+  background-color: #f2f2f2;
+}
+
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;

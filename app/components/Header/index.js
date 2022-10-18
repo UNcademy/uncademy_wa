@@ -22,8 +22,8 @@ export const Header = () => {
 		<ul className=" mb-4 mt-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
 			<Typography
 				as="li"
-				variant="small"
-				color="blue-gray"
+				variant="h6"
+				color="black"
 				className="p-1 font-normal"
 			>
 				<Link href="/" className="flex items-center">
@@ -32,11 +32,11 @@ export const Header = () => {
 			</Typography>
 			<Typography
 				as="li"
-				variant="small"
-				color="blue-gray"
+				variant="h6"
+				color="black"
 				className="p-1 font-normal"
 			>
-				
+
 			</Typography>
 			<Typography
 				as="li"
@@ -50,8 +50,18 @@ export const Header = () => {
 			</Typography>
 			<Typography
 				as="li"
-				variant="small"
-				color="blue-gray"
+				variant="h6"
+				color="black"
+				className="p-1 font-normal"
+			>
+				<Link href="/teacher" className="flex items-center">
+					Rol de Docente
+				</Link>
+			</Typography>
+			<Typography
+				as="li"
+				variant="h6"
+				color="black"
 				className="p-1 font-normal"
 			>
 				<Link href="/financial-info" className="flex items-center">
@@ -62,17 +72,20 @@ export const Header = () => {
 	);
 
 	return (
-		<Navbar color="blue" className="sticky mx-auto py-2 px-4 lg:px-8 lg:py-4 bg-white">
-			<div className="sticky container mx-auto flex items-center justify-between text-blue-gray-900">
+		<Navbar className="w-5/6 mt-5 bg-white bg-opacity-100 mx-auto sticky py-2 px-4 lg:px-8 lg:py-4">
+			<div className="sticky container mx-auto flex items-center justify-between text-red text-2xl">
+				<div className="flex items-center">
+				<img className="mr-3 w-16" src="/6-removebg-preview.png"/>
 				<Link href="/" className="mr-4 py-1.5 font-normal">
-					Uncademy
+					UNcademy
 				</Link>
+				</div>
 
 				<div className="hidden lg:block">{navList}</div>
 				
 				<IconButton
 					variant="text"
-					className="ml-auto h-6 w-6 text-inherit hover:bg-blue focus:bg-blue active:bg-blue lg:hidden"
+					className="ml-auto h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
 					ripple={false}
 					onClick={() => setOpenNav(!openNav)}
 				>
