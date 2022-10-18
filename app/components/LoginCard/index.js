@@ -66,7 +66,7 @@ export const LoginCard = () => {
 									href="#"
 									className="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500"
 								>
-									Forgot password?
+									¿Olvidó su contraseña?
 								</a>
 							</div>
 							<button
