@@ -9,9 +9,6 @@ export default function teacher() {
                 <select id="countries"
                         className="w-1/3 bg-g border border-black text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     <option value="2022-II">2022-II</option>
-                    <option value="2022-I">2022-I</option>
-                    <option value="2021-II">2021-II</option>
-                    <option value="2021-I">2021-I</option>
                 </select>
             </div>
             <Schedule />
