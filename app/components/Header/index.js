@@ -46,15 +46,15 @@ export const Header = () => {
 				color="blue-gray"
 				className="p-1 font-normal"
 			>
-				<Link href="/docs" className="flex items-center">
-					Docs
+				<Link href="/login" className="flex items-center">
+					Inicia sesión
 				</Link>
 			</Typography>
 		</ul>
 	);
 
 	return (
-		<Navbar className="sticky mx-auto max-w-screen-xl py-2 px-4 lg:px-8 lg:py-4">
+		<Navbar className="sticky mx-auto max-w-screen-xl py-2 px-4 lg:px-8 lg:py-4 bg-white">
 			<div className="sticky container mx-auto flex items-center justify-between text-blue-gray-900">
 				<Link href="/" className="mr-4 py-1.5 font-normal">
 					Uncademy
