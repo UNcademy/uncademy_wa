@@ -9,4 +9,7 @@ module.exports = withMT({
     extend: {},
   },
   plugins: [],
+  experiments: {
+    topLevelAwait: true
+  }
 })
