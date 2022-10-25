@@ -52,7 +52,7 @@ export const Header = () => {
 				color="black"
 				className="p-1 font-normal"
 			>
-				<Link href="/login" className="flex items-center">
+				<Link href="/register" className="flex items-center">
 					Registra usuario
 				</Link>
 			</Typography>
