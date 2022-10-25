@@ -10,8 +10,15 @@ export default function Home() {
 				<link rel="icon" href="/6-removebg-preview.png" />
 			</Head>
 
-			<main className={styles.main}>
-				<h1 className="text-5xl font-bold underline">Hello world!</h1>
+			<main>
+				<div className="w-5/6 mt-5 bg-white bg-opacity-100 mx-auto sticky py-2 px-4 lg:px-8 lg:py-4 rounded-lg">
+					<div className="flex justify-center">
+						<img className="mr-3 w-16" src="/6-removebg-preview.png" />
+					</div>
+					<div className="flex justify-center">
+						<h1>Bienvenid@ al Sistema de Información Académica UNcademy</h1>
+					</div>
+				</div>
 			</main>
 		</div>
 	);
