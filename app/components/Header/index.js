@@ -35,12 +35,6 @@ export const Header = () => {
 				variant="h6"
 				color="black"
 				className="p-1 font-normal"
-			></Typography>
-			<Typography
-				as="li"
-				variant="h6"
-				color="black"
-				className="p-1 font-normal"
 			>
 				<Link href="/login" className="flex items-center">
 					Inicia sesión

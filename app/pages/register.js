@@ -1,7 +1,7 @@
-import { LoginCard } from '../components/LoginCard'
+import { RegisterCard } from '../components/RegisterCard'
 
 export default function register() {
   return (
-    <LoginCard/>
+    <RegisterCard/>
   )
 }
