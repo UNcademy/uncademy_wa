@@ -34,6 +34,22 @@ a {
   background-color: #f2f2f2;
 }
 
+.bg-m{
+  background-color: #492a55;
+}
+
+.bg-r{
+  background-color: #a61414;
+}
+
+.bg-ac{
+  background-color: #a9c2d9;
+}
+
+.bg-ao{
+  background-color: #033b86;
+}
+
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
