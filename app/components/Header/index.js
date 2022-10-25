@@ -30,7 +30,7 @@ export const Header = () => {
 					Inicio
 				</Link>
 			</Typography>
-			<Typography
+<Typography
 				as="li"
 				variant="h6"
 				color="black"
@@ -87,7 +87,7 @@ export const Header = () => {
 
 				<IconButton
 					variant="text"
-					className="ml-auto h-6 w-6 text-inherit hover:bg-blue focus:bg-blue active:bg-blue lg:hidden"
+					className="ml-auto h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
 					ripple={false}
 					onClick={() => setOpenNav(!openNav)}
 				>

@@ -8,7 +8,7 @@ body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-  background-color: #033b86;
+  background-color: #033B86;
 }
 
 a {
@@ -32,6 +32,22 @@ a {
 
 .bg-g{
   background-color: #f2f2f2;
+}
+
+.bg-m{
+  background-color: #492a55;
+}
+
+.bg-r{
+  background-color: #a61414;
+}
+
+.bg-ac{
+  background-color: #a9c2d9;
+}
+
+.bg-ao{
+  background-color: #033b86;
 }
 
 @media (prefers-color-scheme: dark) {

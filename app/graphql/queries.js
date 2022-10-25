@@ -1,10 +1,10 @@
 import { gql } from '@apollo/client';
 
 export const getSchedule = gql`
-query{
+query Schedule($semester: String!){
   getSchedule(info:{
     teacherName: "Carmen Aleida Fernandez Moreno"
-    semester: "2022-II"
+    semester: $semester
   })
   {
     monday{
@@ -42,6 +42,37 @@ query{
       course
       schedule
       classroom
+    }
+  }
+}`;
+
+export const classListDetails = gql`
+query ClassList($id: Int!){
+  classListDetails(id: $id){
+    semester
+    courseName
+    courseGroup
+    EnrolledStudents{
+      Student{
+        studentId
+        studentName
+        studyProgram
+      }
+      absences
+      Tasks{
+        taskName
+        weight
+        Grade{
+          value
+        }
+      }
+    }
+    Teachers{
+      teacherId
+      teacherName
+      TeacherRole{
+        isHead
+      }
     }
   }
 }`;
