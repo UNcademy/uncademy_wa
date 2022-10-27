@@ -1,6 +1,12 @@
 import React from 'react';
 
 export const RegisterCard = () => {
+
+	const handleSubmit = (event) => {
+		alert('A name was submitted: ' + this.state.value);
+		event.preventDefault();
+	  }
+
 	return (
 		<section className="">
 			<div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
@@ -9,20 +15,36 @@ export const RegisterCard = () => {
 						<h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
 							Registro de usuario
 						</h1>
-						<form className="space-y-4 md:space-y-6" action="#">
+						<form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
 							<div>
 								<label
-									for="email"
+									for="username"
 									className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
 								>
-									Correo electrónico
+									Nombre de usuario
 								</label>
 								<input
-									type="email"
-									name="email"
-									id="email"
+									type="text"
+									name="username"
+									id="username"
 									className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-									placeholder="username@unal.edu.co"
+									placeholder="username"
+									required=""
+								/>
+							</div>
+							<div>
+								<label
+									for="usertype"
+									className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+								>
+									Tipo de usuario
+								</label>
+								<input
+									type="text"
+									name="usertype"
+									id="usertype"
+									className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+									placeholder="student"
 									required=""
 								/>
 							</div>
@@ -42,6 +64,53 @@ export const RegisterCard = () => {
 									required=""
 								/>
 							</div>
+							<div>
+								<label
+									for="fullname"
+									className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+								>
+									Nombre completo
+								</label>
+								<input
+									type="text"
+									name="fullname"
+									id="fullname"
+									className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+									placeholder="Juan Perez"
+									required=""
+								/>
+							</div>
+							<div>
+								<label
+									for="document"
+									className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+								>
+									Documento de identidad
+								</label>
+								<input
+									type="number"
+									name="document"
+									id="document"
+									className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+									placeholder="79940745"
+									required=""
+								/>
+							</div>
+							{/**
+							"dep_document": "Cundinamarca",
+							"city_document": "Bogota",
+							"genre": "no binario",
+							"email": "paula",
+							"un_mail": "maacalderonj111@gmail.com",
+							"birth_place": "cucuta",
+							"cel": 7738297263,
+							"age":20,
+							"country": "Colombia",
+							"blood_type":"o+",
+							"address": "carrera 21",
+							"army_card": false,
+							"program": "9999999"
+						*/}
 							<div className="flex items-center justify-between">
 								<div className="flex items-start">
 									<div className="flex items-center h-5">
@@ -75,15 +144,6 @@ export const RegisterCard = () => {
 							>
 								Sign in
 							</button>
-							<p className="text-sm font-light text-gray-500 dark:text-gray-400">
-								¿No tiene una cuenta aún?{' '}
-								<a
-									href="#"
-									className="font-medium text-primary-600 hover:underline dark:text-primary-500"
-								>
-									Registrate
-								</a>
-							</p>
 						</form>
 					</div>
 				</div>
