@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { client } from '../../graphql/apolloClient';
+import {registerUser} from "../../graphql/mutations";
 
 async function doMutation(registerBody) {
 	const { data } = await client.mutate({
