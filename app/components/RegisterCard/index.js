@@ -1,15 +1,49 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { client } from '../../graphql/apolloClient';
+
+async function doMutation(registerBody) {
+	const { data } = await client.mutate({
+		mutation: registerUser,
+		variables: {
+			registerBody: registerBody,
+		},
+	});
+	return data
+}
 
 export const RegisterCard = () => {
+	const [username, setUsername] = useState();
+	const [usertype, setUsertype] = useState();
+	const [password, setPassword] = useState();
+	const [fullname, setFullname] = useState();
+	const [idDoc, setIdDoc] = useState();
+	const responseBody = {
+		username: '',
+		usertype: '',
+		password: '',
+		fullname: '',
+		idDoc: '',
+	};
+
+	const inputChangeHandler = (setFunction, event) => {
+		setFunction(event.target.value);
+	};
 
 	const handleSubmit = (event) => {
-		alert('A name was submitted: ' + this.state.value);
 		event.preventDefault();
-	  }
+		responseBody.username = username;
+		responseBody.usertype = usertype;
+		responseBody.password = password;
+		responseBody.fullname = fullname;
+		responseBody.idDoc = idDoc;
+		doMutation(responseBody)
+			.then(d => {alert(d)})
+			.catch(err => {alert(err)})
+	};
 
 	return (
-		<section className="">
-			<div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+		<section className="mt-8">
+			<div className="flex flex-col items-center justify-center px-6 py-12 mx-auto md:h-screen lg:py-0 mt-8">
 				<div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
 					<div className="p-6 space-y-4 md:space-y-6 sm:p-8">
 						<h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
@@ -18,7 +52,7 @@ export const RegisterCard = () => {
 						<form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
 							<div>
 								<label
-									for="username"
+									htmlFor="username"
 									className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
 								>
 									Nombre de usuario
@@ -30,11 +64,12 @@ export const RegisterCard = () => {
 									className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
 									placeholder="username"
 									required=""
+									onChange={(e) => inputChangeHandler(setUsername, e)}
 								/>
 							</div>
 							<div>
 								<label
-									for="usertype"
+									htmlFor="usertype"
 									className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
 								>
 									Tipo de usuario
@@ -46,11 +81,12 @@ export const RegisterCard = () => {
 									className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
 									placeholder="student"
 									required=""
+									onChange={(e) => inputChangeHandler(setUsertype, e)}
 								/>
 							</div>
 							<div>
 								<label
-									for="password"
+									htmlFor="password"
 									className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
 								>
 									Contraseña
@@ -62,11 +98,12 @@ export const RegisterCard = () => {
 									placeholder="••••••••"
 									className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
 									required=""
+									onChange={(e) => inputChangeHandler(setPassword, e)}
 								/>
 							</div>
 							<div>
 								<label
-									for="fullname"
+									htmlFor="fullname"
 									className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
 								>
 									Nombre completo
@@ -78,11 +115,12 @@ export const RegisterCard = () => {
 									className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
 									placeholder="Juan Perez"
 									required=""
+									onChange={(e) => inputChangeHandler(setFullname, e)}
 								/>
 							</div>
 							<div>
 								<label
-									for="document"
+									htmlFor="document"
 									className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
 								>
 									Documento de identidad
@@ -94,6 +132,7 @@ export const RegisterCard = () => {
 									className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
 									placeholder="79940745"
 									required=""
+									onChange={(e) => inputChangeHandler(setIdDoc, e)}
 								/>
 							</div>
 							{/**
@@ -111,38 +150,11 @@ export const RegisterCard = () => {
 							"army_card": false,
 							"program": "9999999"
 						*/}
-							<div className="flex items-center justify-between">
-								<div className="flex items-start">
-									<div className="flex items-center h-5">
-										<input
-											id="remember"
-											aria-describedby="remember"
-											type="checkbox"
-											className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
-											required=""
-										/>
-									</div>
-									<div className="ml-3 text-sm">
-										<label
-											for="remember"
-											className="text-gray-500 dark:text-gray-300"
-										>
-											Remember me
-										</label>
-									</div>
-								</div>
-								<a
-									href="#"
-									className="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500"
-								>
-									¿Olvidó su contraseña?
-								</a>
-							</div>
 							<button
 								type="submit"
-								className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+								className="w-full bg-blue-600  focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
 							>
-								Sign in
+								Registrar
 							</button>
 						</form>
 					</div>
