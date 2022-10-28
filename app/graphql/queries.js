@@ -114,3 +114,15 @@ query Stats($id: Int!){
   }
 }
 `
+
+export const login=gql `
+query login($username:String!, $password:String!){
+    login(loginBody:{
+        username: $username,
+        password: $password
+      }){
+        statusCode
+        message
+        data{accessToken}
+    }
+}`;
