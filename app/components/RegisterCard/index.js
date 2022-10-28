@@ -33,7 +33,7 @@ export const RegisterCard = () => {
 	const handleSubmit = (event) => {
 		event.preventDefault();
 		responseBody.user_name = username;
-		responseBody.usertype = usertype;
+		responseBody.user_type = usertype;
 		responseBody.password = password;
 		responseBody.fullname = fullname;
 		responseBody.idDoc = idDoc;
