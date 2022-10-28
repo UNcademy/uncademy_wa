@@ -13,7 +13,7 @@ async function doMutation(registerBody) {
 }
 
 export const RegisterCard = () => {
-	const [username, setUsername] = useState();
+	const [username, setUsername] = useState('');
 	const [usertype, setUsertype] = useState();
 	const [password, setPassword] = useState();
 	const [fullname, setFullname] = useState();
