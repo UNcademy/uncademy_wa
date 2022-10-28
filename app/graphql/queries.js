@@ -85,3 +85,32 @@ query Task($teacherId: Int!, $classId: Int!){
   }
 }
 `
+
+export const generateAct = gql `
+query Act($id: Int!, $name: String!){
+  generateAct(groupId: $id, teacherName: $name){
+    message
+  }
+}
+`
+
+export const getAct = gql `
+query TokenAct($id: Int!){
+  getAct(actId: $id){
+    message
+  }
+}
+`
+
+export const statsByGroup = gql `
+query Stats($id: Int!){
+  statsByGroup(groupId: $id){
+    participation_percentage
+    approbation_percentage
+    average_grade
+    standard_deviation
+    best_grade
+    worst_grade
+  }
+}
+`

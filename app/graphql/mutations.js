@@ -57,3 +57,11 @@ mutation EditGrade($classId: Int!, $studentId: Int!, $taskId: Int!, $grade: Int!
   }
 }
 `
+
+export const createFinalGrade = gql `
+mutation FinalGrade($id: Int!){
+  createFinalGrade(id: $id){
+    message
+  }
+}
+`
