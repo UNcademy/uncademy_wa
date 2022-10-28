@@ -9,7 +9,7 @@ async function doMutation(registerBody) {
 			registerBody: registerBody,
 		},
 	});
-	return data
+	return data.register.message
 }
 
 export const RegisterCard = () => {
