@@ -22,3 +22,12 @@ mutation Absences($classId: Int!, $studentId: Int!, $absences: Int!, $maxAbs: In
   }
 }
 `
+
+export const registerUser = gql`
+mutation Register($registerBody: Register!){
+  register(registerBody: $registerBody)
+  {
+    message
+  }
+}
+`
