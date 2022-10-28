@@ -36,7 +36,7 @@ export const RegisterCard = () => {
 		responseBody.user_type = usertype;
 		responseBody.password = password;
 		responseBody.full_name = fullname;
-		responseBody.idDoc = idDoc;
+		responseBody.document = idDoc;
 		doMutation(responseBody)
 			.then(d => {alert(d)})
 			.catch(err => {alert(err)})
