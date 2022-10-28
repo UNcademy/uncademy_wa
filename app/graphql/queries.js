@@ -61,7 +61,6 @@ query ClassList($id: Int!){
       absences
       Tasks{
         taskName
-        weight
         Grade{
           value
         }
@@ -76,3 +75,13 @@ query ClassList($id: Int!){
     }
   }
 }`;
+
+export const getTasks = gql `
+query Task($teacherId: Int!, $classId: Int!){
+  getTasks(teacherId: $teacherId, classId: $classId){
+    taskId
+    taskName
+    weight
+  }
+}
+`

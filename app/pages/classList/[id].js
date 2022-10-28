@@ -5,14 +5,31 @@ import {client} from "../../graphql/apolloClient";
 import {classListDetails} from "../../graphql/queries";
 import Link from "next/link";
 
-async function getData(id) {
+async function getData(id, teacher) {
+    let check = false
+    let tid = 0
+
     const {data} = await client.query({
         query: classListDetails,
         variables: {
             id: id
         }
     });
-    return data.classListDetails;
+
+    data.classListDetails.Teachers.map(({_, teacherId, teacherName, TeacherRole}) => {
+        if (teacher === teacherName){
+            tid = teacherId
+            if (TeacherRole.isHead){
+                check = true
+            }
+        }
+    })
+
+    return {
+        ...data.classListDetails,
+        check: check,
+        tid: tid
+    };
 }
 
 export default function ClassList() {
@@ -24,8 +41,53 @@ export default function ClassList() {
         courseName: "",
         courseGroup: 0,
         EnrolledStudents: [],
-        Teachers: []
+        Teachers: [],
+        check: false,
+        tid: 0
     })
+
+    function displayTasks(t, sid){
+        if (t.length === 0){
+            return (
+                <div className="items-center">
+                    <Link href={`/grade/${output.tid}/${id}/${sid}`}>
+                    <button className="bg-ao hover:bg-blue-700 text-white font-bold py-2 px-2 mx-auto rounded flex">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6 mr-2">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M7.5 7.5h-.75A2.25 2.25 0 004.5 9.75v7.5a2.25 2.25 0 002.25 2.25h7.5a2.25 2.25 0 002.25-2.25v-7.5a2.25 2.25 0 00-2.25-2.25h-.75m0-3l-3-3m0 0l-3 3m3-3v11.25m6-2.25h.75a2.25 2.25 0 012.25 2.25v7.5a2.25 2.25 0 01-2.25 2.25h-7.5a2.25 2.25 0 01-2.25-2.25v-.75" />
+                        </svg>
+                        Cargar
+                    </button>
+                    </Link>
+                </div>
+            )
+        } else {
+            return(
+                <div className="items-center">
+                    <table className="table-auto mx-auto border-separate border-spacing-2 border border-black">
+                        <tbody>
+                        {
+                            t.map(({_, taskName, Grade}) =>
+                                <tr>
+                                    <td className="border border-black bg-g px-3 bg-ac text-blue text-md font-semibold">{taskName}</td>
+                                    <td className="border border-black bg-g px-3">{Grade.value}</td>
+                                </tr>
+                            )}
+                        </tbody>
+                    </table>
+                    <Link href={`/grade/${output.tid}/${id}/${sid}`}>
+                    <button className="bg-ao hover:bg-blue-700 text-white font-bold py-2 px-2 mx-auto mt-3 rounded flex">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2}
+                             stroke="currentColor" className="w-6 h-6 mr-2">
+                            <path strokeLinecap="round" strokeLinejoin="round"
+                                  d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"/>
+                        </svg>
+                        Editar
+                    </button>
+                    </Link>
+                </div>
+            )
+        }
+    }
 
     function displayAbsences(val){
         if (val == null){
@@ -47,8 +109,9 @@ export default function ClassList() {
         else {
             return (students.map(({_, Student, absences, Tasks}) =>
                 <tr>
-                    <td className="border border-black bg-g p-3">{Student.studentName}</td>
-                    <td className="border border-black bg-g p-3">{Student.studyProgram}</td>
+                    <td className="border border-black p-3 bg-ao text-white text-lg font-semibold">{Student.studentId}</td>
+                    <td className="border border-black text-center bg-g p-3">{Student.studentName}</td>
+                    <td className="border border-black text-center bg-g p-3">{Student.studyProgram}</td>
                     <td className="border border-black bg-g p-3 justify-center items-center">
                         <div className="flex items-center justify-center">
                         <p className="mx-auto">
@@ -57,7 +120,7 @@ export default function ClassList() {
                             }
                         </p>
                         <Link href={`/${id}/addAbsences/${Student.studentId}`}>
-                            <button className="bg-ac hover:bg-blue-700 hover:text-white text-blue font-bold py-2 px-2 mx-auto rounded flex">
+                            <button className="bg-r hover:bg-blue-700 text-white font-bold py-2 px-2 mx-auto rounded flex">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2}
                                      stroke="currentColor" className="w-6 h-6 mr-2">
                                     <path strokeLinecap="round" strokeLinejoin="round"
@@ -70,49 +133,10 @@ export default function ClassList() {
                     </td>
 
                     <td className="border border-black bg-g p-3 text-center">
-                        <div className="flex items-center">
-                        <button className="bg-m hover:bg-blue-700 text-white font-bold py-2 px-2 mr-3 rounded flex">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6 mr-2">
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M7.5 7.5h-.75A2.25 2.25 0 004.5 9.75v7.5a2.25 2.25 0 002.25 2.25h7.5a2.25 2.25 0 002.25-2.25v-7.5a2.25 2.25 0 00-2.25-2.25h-.75m0-3l-3-3m0 0l-3 3m3-3v11.25m6-2.25h.75a2.25 2.25 0 012.25 2.25v7.5a2.25 2.25 0 01-2.25 2.25h-7.5a2.25 2.25 0 01-2.25-2.25v-.75" />
-                            </svg>
-                            Cargar
-                        </button>
-                        <button className="bg-ac hover:bg-blue-700 hover:text-white text-blue font-bold py-2 px-2 mx-auto rounded flex">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6 mr-2">
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                            </svg>
-                            Ver y editar
-                        </button>
-                        </div>
+                        {displayTasks(Tasks, Student.studentId)}
                     </td>
                 </tr>
             ))
-        }
-    }
-
-    function displayTaskButton(teacher){
-        let check = false
-        output.Teachers.map(({_, teacherId, teacherName, TeacherRole}) => {
-            if (teacher === teacherName){
-                if (TeacherRole.isHead){
-                    check = true
-                }
-            }
-        })
-        if (check){
-            return (
-                <Link href={`/addTasks/${id}`}>
-                    <button className="bg-m hover:bg-blue-700 text-white font-bold py-2 px-2 mx-auto rounded flex">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6 mr-3">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                        Asignar Tareas
-                    </button>
-                </Link>
-            )
-        } else {
-            return null
         }
     }
 
@@ -129,15 +153,10 @@ export default function ClassList() {
                     <h5 className="text-xl font-bold tracking-tight text-gray-900 mx-auto">{output.courseName}</h5>
                     <p className="font-normal mx-auto">Grupo #{output.courseGroup}</p>
                 </div>
-                <div className="mt-4">
-                    {
-                        displayTaskButton("Carmen Aleida Fernandez Moreno")
-                    }
-                </div>
                 <table className="table-auto mx-auto mt-6 border-separate border-spacing-2 border border-black">
                     <thead>
                     <tr>
-                        <th className="border border-black p-3 bg-ao text-white text-lg font-semibold">Estudiante</th>
+                        <th className="border border-black p-3 bg-ao text-white text-lg font-semibold" colSpan={2}>Estudiante</th>
                         <th className="border border-black p-3 bg-ao text-white text-lg font-semibold">Programa</th>
                         <th className="border border-black p-3 bg-ao text-white text-lg font-semibold">Número de fallas</th>
                         <th className="border border-black p-3 bg-ao text-white text-lg font-semibold">Calificaciones</th>
@@ -150,6 +169,17 @@ export default function ClassList() {
                     </tbody>
                 </table>
                 <div className="flex mt-6 justify-center items-center">
+                    {
+                        output.check ? <Link href={`/manageTasks/${id}/${output.tid}`}>
+                            <button className="bg-m hover:bg-blue-700 text-white font-bold py-2 px-2 mx-auto rounded flex">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6 mr-2">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M6 6.878V6a2.25 2.25 0 012.25-2.25h7.5A2.25 2.25 0 0118 6v.878m-12 0c.235-.083.487-.128.75-.128h10.5c.263 0 .515.045.75.128m-12 0A2.25 2.25 0 004.5 9v.878m13.5-3A2.25 2.25 0 0119.5 9v.878m0 0a2.246 2.246 0 00-.75-.128H5.25c-.263 0-.515.045-.75.128m15 0A2.25 2.25 0 0121 12v6a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 18v-6c0-.98.626-1.813 1.5-2.122" />
+                                </svg>
+
+                                Administrar Tareas
+                            </button>
+                        </Link> : null
+                    }
                     <button className="bg-m hover:bg-blue-700 text-white font-bold py-2 px-2 mx-auto rounded flex">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2}
                              stroke="currentColor" className="w-6 h-6 mr-2">
@@ -180,7 +210,7 @@ export default function ClassList() {
         }
     }
 
-    getData(id).then(res => setOutput(res))
+    getData(id, "Carmen Aleida Fernandez Moreno").then(res => setOutput(res)).catch(err => console.log(""))
 
     return (
         <>
