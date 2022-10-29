@@ -76,3 +76,30 @@ query ClassList($id: Int!){
     }
   }
 }`;
+
+export const getRegistration = gql`
+query GetRegistration($id: String!){
+  getRegistration(id: $id){
+    idStudent
+    idProgram
+    subjects{
+      idSubject
+      nameSubject
+      cupSubject
+      days
+      time
+
+    }
+  }
+}`;
+
+
+export const getAppointment = gql`
+query GetAppointment($id: String!){
+  getAppointment(id:$id){
+    idStudent
+    idProgram
+    date
+    dateEnd
+  }
+}`;
