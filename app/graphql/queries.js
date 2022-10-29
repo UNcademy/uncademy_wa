@@ -61,6 +61,7 @@ query ClassList($id: Int!){
       absences
       Tasks{
         taskName
+        weight
         Grade{
           value
         }
@@ -125,4 +126,32 @@ query login($username:String!, $password:String!){
         message
         data{accessToken}
     }
+}`;
+
+
+export const getRegistration = gql`
+query GetRegistration($id: String!){
+  getRegistration(id: $id){
+    idStudent
+    idProgram
+    subjects{
+      idSubject
+      nameSubject
+      cupSubject
+      days
+      time
+
+    }
+  }
+}`;
+
+
+export const getAppointment = gql`
+query GetAppointment($id: String!){
+  getAppointment(id:$id){
+    idStudent
+    idProgram
+    date
+    dateEnd
+  }
 }`;
