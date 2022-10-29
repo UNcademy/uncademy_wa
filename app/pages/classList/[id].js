@@ -8,6 +8,7 @@ import {generateAct} from "../../graphql/queries";
 import {statsByGroup} from "../../graphql/queries";
 import {createFinalGrade} from "../../graphql/mutations";
 import Link from "next/link";
+import jwtDecode from "jwt-decode";
 
 async function getData(id, teacher) {
     let check = false
@@ -91,7 +92,7 @@ export default function ClassList() {
     })
 
     useEffect(() => {
-        getData(id, "Carmen Aleida Fernandez Moreno").then(res => {
+        getData(id, jwtDecode(localStorage.getItem('Token')).fullname).then(res => {
             setOutput(res)
         }).catch(err => console.log(""))
     }, [id])
@@ -280,7 +281,7 @@ export default function ClassList() {
                         output.closed ?
                             <button
                                 onClick={() => {
-                                    generatePDF(id,"Carmen Aleida Fernandez Moreno").then(res => {
+                                    generatePDF(id,jwtDecode(localStorage.getItem('Token')).fullname).then(res => {
                                         const downloadLink = document.createElement("a");
                                         downloadLink.href = "data:application/octet-stream;base64," + res;
                                         downloadLink.download = `Acta${id}.pdf`;

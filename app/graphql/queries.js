@@ -1,9 +1,9 @@
 import { gql } from '@apollo/client';
 
 export const getSchedule = gql`
-query Schedule($semester: String!){
+query Schedule($semester: String!, $teacher: String!){
   getSchedule(info:{
-    teacherName: "Carmen Aleida Fernandez Moreno"
+    teacherName: $teacher
     semester: $semester
   })
   {

@@ -7,13 +7,15 @@ import {updateTask} from "../../../graphql/mutations";
 import {deleteTasks} from "../../../graphql/mutations";
 import {getTasks} from "../../../graphql/queries";
 import Link from "next/link";
+import jwtDecode from "jwt-decode";
 
-async function doMutation(id, tasks) {
+async function doMutation(id, tasks, teach) {
     const {data} = await client.mutate({
         mutation: createTasks,
         variables: {
             classId: id,
-            tasks: tasks
+            tasks: tasks,
+            teacher: teach
         }
     });
     return data.createTasks.message;
@@ -98,7 +100,7 @@ export default function ManageTasks() {
 
     const sendData = e => {
         e.preventDefault()
-        doMutation(id, Object.values(inputs)).then(_ => setOutput(<div className="w-3/4 p-4 bg-ac rounded-lg border border-black shadow-md justify-center mt-6">
+        doMutation(id, Object.values(inputs), jwtDecode(localStorage.getItem('Token')).fullname).then(_ => setOutput(<div className="w-3/4 p-4 bg-ac rounded-lg border border-black shadow-md justify-center mt-6">
             <h5 className="text-xl font-bold tracking-tight text-gray-900 mx-auto">¡Las tareas se guardaron con éxito!</h5>
             <Link href={`/classList/${id}`}>
                 <a className="text-xl font-bold tracking-tight text-blue mx-auto">Volver</a>

@@ -1,9 +1,9 @@
 import { gql } from '@apollo/client';
 
 export const createTasks = gql`
-mutation Tasks($classId: Int!, $tasks: [TaskAssign!]!){
+mutation Tasks($classId: Int!, $tasks: [TaskAssign!]!, $teacher: String!){
   createTasks(classId: $classId, tasks:{
-    teacherName: "Carmen Aleida Fernandez Moreno"
+    teacherName: $teacher
     tasks: $tasks
   })
   {

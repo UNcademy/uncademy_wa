@@ -73,7 +73,10 @@ export const RegisterCard = () => {
 		responseBody.army_card = armyCard;
 		responseBody.program = program;
 		doMutation(responseBody)
-			.then(d => {alert(d)})
+			.then(d => {
+				alert(d)
+				window.location.href = "/login"
+			})
 			.catch(err => {alert(err)})
 	};
 

@@ -2,12 +2,14 @@ import {getSchedule} from "../../graphql/queries";
 import {client} from "../../graphql/apolloClient";
 import React, {useState} from "react";
 import Link from "next/link";
+import jwtDecode from "jwt-decode";
 
-async function getData(inputs) {
+async function getData(inputs, teach) {
     const { data } = await client.query({
         query: getSchedule,
         variables: {
-            semester: inputs.semester
+            semester: inputs.semester,
+            teacher: teach
         }
     });
     return data.getSchedule;
@@ -58,7 +60,7 @@ export default function Schedule() {
                  onChange={changeForm}
                  onSubmit={e => {
                      e.preventDefault()
-                     getData(inputs).then(res => setOutput(res))
+                     getData(inputs, jwtDecode(localStorage.getItem('Token')).fullname).then(res => setOutput(res))
                  }}
              >
                  <label htmlFor="semester" className="text-lg text-blue mr-5 my-auto">Semestre:</label>
