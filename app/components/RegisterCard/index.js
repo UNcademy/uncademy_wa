@@ -18,16 +18,38 @@ export const RegisterCard = () => {
 	const [password, setPassword] = useState('');
 	const [fullname, setFullname] = useState();
 	const [idDoc, setIdDoc] = useState();
+	const [depDocument, setDepDocument] = useState('');
+	const [cityDocument, setCityDocument] = useState('');
+	const [genre, setGenre] = useState('');
+	const [email, setEmail] = useState('');
+	const [unmail, setUnmail] = useState('');
+	const [birthPlace, setBirthPlace] = useState('');
+	const [cel, setCel] = useState('');
+	const [age, setAge] = useState();
+	const [country, setCountry] = useState();
+	const [bloodType, setBloodType] = useState();
+	const [address, setAddress] = useState();
+	const [armyCard, setArmyCard] = useState(false);
+	const [program, setProgram] = useState();
+
 	const responseBody = {
-		username: '',
-		usertype: '',
+		user_name: '',
+		user_type: '',
 		password: '',
-		fullname: '',
-		idDoc: '',
+		full_name: '',
+		document: '',
+		dep_document: '',
+		city_document: '',
+		genre: '',
+		email: '',
 	};
 
 	const inputChangeHandler = (setFunction, event) => {
-		setFunction(event.target.value);
+		
+		const target = event.target;
+    	const value = target.type === 'checkbox' ? setFunction(event.target.checked) : setFunction(event.target.value);
+		// setFunction(event.target.value);
+		console.log(value)
 	};
 
 	const handleSubmit = (event) => {
@@ -37,6 +59,19 @@ export const RegisterCard = () => {
 		responseBody.password = password;
 		responseBody.full_name = fullname;
 		responseBody.document = idDoc;
+		responseBody.dep_document = depDocument;
+		responseBody.city_document = cityDocument;
+		responseBody.genre = genre;
+		responseBody.email = email;
+		responseBody.un_mail = unmail;
+		responseBody.birth_place = birthPlace;
+		responseBody.cel = cel;
+		responseBody.age = age;
+		responseBody.country = country;
+		responseBody.blood_type = bloodType;
+		responseBody.address = address;
+		responseBody.army_card = armyCard;
+		responseBody.program = program;
 		doMutation(responseBody)
 			.then(d => {alert(d)})
 			.catch(err => {alert(err)})
@@ -136,21 +171,228 @@ export const RegisterCard = () => {
 									onChange={(e) => inputChangeHandler(setIdDoc, e)}
 								/>
 							</div>
-							{/**
-							"dep_document": "Cundinamarca",
-							"city_document": "Bogota",
-							"genre": "no binario",
-							"email": "paula",
-							"un_mail": "maacalderonj111@gmail.com",
-							"birth_place": "cucuta",
-							"cel": 7738297263,
-							"age":20,
-							"country": "Colombia",
-							"blood_type":"o+",
-							"address": "carrera 21",
-							"army_card": false,
-							"program": "9999999"
-						*/}
+							<div>
+								<label
+									htmlFor="dep_document"
+									className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+								>
+									Departamento
+								</label>
+								<input
+									type="text"
+									name="dep_document"
+									id="dep_document"
+									className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+									placeholder="79940745"
+									required=""
+									onChange={(e) => inputChangeHandler(setDepDocument, e)}
+								/>
+							</div>
+							<div>
+								<label
+									htmlFor="city_document"
+									className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+								>
+									Ciudad
+								</label>
+								<input
+									type="text"
+									name="city_document"
+									id="city_document"
+									className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+									placeholder="79940745"
+									required=""
+									onChange={(e) => inputChangeHandler(setDepDocument, e)}
+								/>
+							</div>
+							<div>
+								<label
+									htmlFor="genre"
+									className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+								>
+									Género
+								</label>
+								<input
+									type="text"
+									name="genre"
+									id="genre"
+									className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+									placeholder="79940745"
+									required=""
+									onChange={(e) => inputChangeHandler(setGenre, e)}
+								/>
+							</div>
+							<div>
+								<label
+									htmlFor="email"
+									className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+								>
+									Correo electrónico
+								</label>
+								<input
+									type="text"
+									name="email"
+									id="email"
+									className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+									placeholder="79940745"
+									required=""
+									onChange={(e) => inputChangeHandler(setEmail, e)}
+								/>
+							</div>
+							<div>
+								<label
+									htmlFor="un_mail"
+									className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+								>
+									Correo electrónico unal
+								</label>
+								<input
+									type="text"
+									name="un_mail"
+									id="un_mail"
+									className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+									placeholder="79940745"
+									required=""
+									onChange={(e) => inputChangeHandler(setUnmail, e)}
+								/>
+							</div>
+							<div>
+								<label
+									htmlFor="birth_place"
+									className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+								>
+									Lugar de nacimiento
+								</label>
+								<input
+									type="text"
+									name="birth_place"
+									id="birth_place"
+									className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+									placeholder="79940745"
+									required=""
+									onChange={(e) => inputChangeHandler(setBirthPlace, e)}
+								/>
+							</div>
+							<div>
+								<label
+									htmlFor="cel"
+									className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+								>
+									Celular
+								</label>
+								<input
+									type="number"
+									name="cel"
+									id="cel"
+									className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+									placeholder="79940745"
+									required=""
+									onChange={(e) => inputChangeHandler(setCel, e)}
+								/>
+							</div>
+							<div>
+								<label
+									htmlFor="age"
+									className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+								>
+									Edad
+								</label>
+								<input
+									type="number"
+									name="age"
+									id="age"
+									className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+									placeholder="79940745"
+									required=""
+									onChange={(e) => inputChangeHandler(setAge, e)}
+								/>
+							</div>
+							<div>
+								<label
+									htmlFor="country"
+									className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+								>
+									País
+								</label>
+								<input
+									type="text"
+									name="country"
+									id="country"
+									className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+									placeholder="79940745"
+									required=""
+									onChange={(e) => inputChangeHandler(setCountry, e)}
+								/>
+							</div>
+							<div>
+								<label
+									htmlFor="blood_type"
+									className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+								>
+									Tipo de sangre
+								</label>
+								<input
+									type="text"
+									name="blood_type"
+									id="blood_type"
+									className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+									placeholder="79940745"
+									required=""
+									onChange={(e) => inputChangeHandler(setBloodType, e)}
+								/>
+							</div>
+							<div>
+								<label
+									htmlFor="address"
+									className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+								>
+									Dirección de residencia
+								</label>
+								<input
+									type="text"
+									name="address"
+									id="address"
+									className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+									placeholder="Carrera 21"
+									required=""
+									onChange={(e) => inputChangeHandler(setAddress, e)}
+								/>
+							</div>
+							<div>
+								<label
+									htmlFor="army_card"
+									className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+								>
+									Tarjeta militar
+								</label>
+								<input
+									type="checkbox"
+									checked={armyCard}			
+									name="army_card"
+									id="army_card"
+									className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+									placeholder="true"
+									required=""
+									onChange={(e) => inputChangeHandler(setArmyCard, e)}
+								/>
+							</div>
+							<div>
+								<label
+									htmlFor="program"
+									className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+								>
+									Programa
+								</label>
+								<input
+									type="number"
+									name="program"
+									id="program"
+									className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+									placeholder="999999"
+									required=""
+									onChange={(e) => inputChangeHandler(setProgram, e)}
+								/>
+							</div>
 							<button
 								type="submit"
 								className="w-full bg-blue-600  focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
