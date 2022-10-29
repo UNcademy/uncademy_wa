@@ -23,6 +23,49 @@ mutation Absences($classId: Int!, $studentId: Int!, $absences: Int!, $maxAbs: In
 }
 `
 
+export const updateTask = gql`
+mutation UpTask($id: Int!, $task: String!){
+  updateTask(id: $id, task: {
+    taskName: $task
+  })
+  {
+    message
+  }
+}
+`
+
+export const deleteTasks = gql `
+mutation RemoveTask($classId: Int!){
+  deleteTasks(classId: $classId){
+    message
+  }
+}
+`
+
+export const addGrade = gql `
+mutation AddGrade($classId: Int!, $studentId: Int!, $taskId: Int!, $grade: Int!){
+  addGrade(classId: $classId, studentId: $studentId, taskId: $taskId, grade: {value: $grade}){
+    value
+  }
+}
+`
+
+export const editGrade = gql `
+mutation EditGrade($classId: Int!, $studentId: Int!, $taskId: Int!, $grade: Int!){
+  editGrade(classId: $classId, studentId: $studentId, taskId: $taskId, grade: {value: $grade}){
+    message
+  }
+}
+`
+
+export const createFinalGrade = gql `
+mutation FinalGrade($id: Int!){
+  createFinalGrade(id: $id){
+    message
+  }
+}
+`
+
 export const registerUser = gql`
 mutation Register($registerBody: Register!){
   register(registerBody: $registerBody)

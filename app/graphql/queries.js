@@ -61,7 +61,6 @@ query ClassList($id: Int!){
       absences
       Tasks{
         taskName
-        weight
         Grade{
           value
         }
@@ -75,4 +74,55 @@ query ClassList($id: Int!){
       }
     }
   }
+}`;
+
+export const getTasks = gql `
+query Task($teacherId: Int!, $classId: Int!){
+  getTasks(teacherId: $teacherId, classId: $classId){
+    taskId
+    taskName
+    weight
+  }
+}
+`
+
+export const generateAct = gql `
+query Act($id: Int!, $name: String!){
+  generateAct(groupId: $id, teacherName: $name){
+    message
+  }
+}
+`
+
+export const getAct = gql `
+query TokenAct($id: Int!){
+  getAct(actId: $id){
+    message
+  }
+}
+`
+
+export const statsByGroup = gql `
+query Stats($id: Int!){
+  statsByGroup(groupId: $id){
+    participation_percentage
+    approbation_percentage
+    average_grade
+    standard_deviation
+    best_grade
+    worst_grade
+  }
+}
+`
+
+export const login=gql `
+query login($username:String!, $password:String!){
+    login(loginBody:{
+        username: $username,
+        password: $password
+      }){
+        statusCode
+        message
+        data{accessToken}
+    }
 }`;
