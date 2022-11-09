@@ -45,6 +45,13 @@ async function getData(id, tid) {
 
 export default function Grade() {
 
+    useEffect(() => {
+        const token = localStorage.getItem('Token')
+        if (!token){
+            window.location.href = "/login"
+        }
+    }, [])
+
     const {tid, cid, sid} = useRouter().query
 
     const [inputs, setInputs] = useState([])

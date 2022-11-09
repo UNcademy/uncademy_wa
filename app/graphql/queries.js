@@ -140,7 +140,6 @@ query GetRegistration($id: String!){
       cupSubject
       days
       time
-
     }
   }
 }`;
@@ -155,3 +154,17 @@ query GetAppointment($id: String!){
     dateEnd
   }
 }`;
+
+//TODO: Reemplazar por el query respectivo
+export const soapService = gql `
+query Stats($id: Int!){
+  statsByGroup(groupId: $id){
+    participation_percentage
+    approbation_percentage
+    average_grade
+    standard_deviation
+    best_grade
+    worst_grade
+  }
+}
+`

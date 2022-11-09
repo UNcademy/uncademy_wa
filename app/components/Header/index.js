@@ -36,19 +36,6 @@ export const Header = () => {
 	const navList = (
 		<ul className=" mb-4 mt-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
 			{
-				logged ?
-					<Typography
-						as="li"
-						variant="h6"
-						color="black"
-						className="p-1 font-normal"
-					>
-						<Link href="/" className="flex items-center">
-							Inicio
-						</Link>
-					</Typography> : null
-			}
-			{
 				!logged ?
 				<Typography
 					as="li"
@@ -82,8 +69,47 @@ export const Header = () => {
 						color="black"
 						className="p-1 font-normal"
 					>
+						<Link href="/horario/105" className="flex items-center">
+							Ver Horario
+						</Link>
+					</Typography> : null
+			}
+			{
+				logged && (role === "student" || role === "both") ?
+					<Typography
+						as="li"
+						variant="h6"
+						color="black"
+						className="p-1 font-normal"
+					>
+						<Link href="/process" className="flex items-center">
+							Proceso de inscripción
+						</Link>
+					</Typography> : null
+			}
+			{
+				logged && (role === "student" || role === "both") ?
+					<Typography
+						as="li"
+						variant="h6"
+						color="black"
+						className="p-1 font-normal"
+					>
 						<Link href="/financial-info" className="flex items-center">
 							Información Financiera
+						</Link>
+					</Typography> : null
+			}
+			{
+				logged && (role === "student" || role === "both") ?
+					<Typography
+						as="li"
+						variant="h6"
+						color="black"
+						className="p-1 font-normal"
+					>
+						<Link href="/external" className="flex items-center">
+							Intercambios
 						</Link>
 					</Typography> : null
 			}

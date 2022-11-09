@@ -27,7 +27,7 @@ export const FinancialInfoCard = () => {
 									Recibos de pago
 								</AccordionHeader>
 								<AccordionBody>
-									Aquí se verán los recibos de pago del estudiante
+									No cuenta con recibos de pago pendientes para este período.
 								</AccordionBody>
 							</Accordion>
 						</Fragment>

@@ -78,6 +78,13 @@ async function doMutation(id) {
 
 export default function ClassList() {
 
+    useEffect(() => {
+        const token = localStorage.getItem('Token')
+        if (!token){
+            window.location.href = "/login"
+        }
+    }, [])
+
     const {id} = useRouter().query
 
     const [output, setOutput] = useState({

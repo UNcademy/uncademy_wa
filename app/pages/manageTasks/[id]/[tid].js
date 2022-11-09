@@ -55,6 +55,13 @@ async function getData(id, tid) {
 
 export default function ManageTasks() {
 
+    useEffect(() => {
+        const token = localStorage.getItem('Token')
+        if (!token){
+            window.location.href = "/login"
+        }
+    }, [])
+
     const {id} = useRouter().query
     const {tid} = useRouter().query
 
