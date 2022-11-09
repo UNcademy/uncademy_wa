@@ -1,8 +1,16 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import Schedule from "../components/Teacher/schedule";
 import Head from "next/head";
 
-export default function teacher() {
+export default function Teacher() {
+
+    useEffect(() => {
+        const token = localStorage.getItem('Token')
+        if (!token){
+            window.location.href = "/login"
+        }
+    }, [])
+
     return (
         <>
         <Head>

@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import Head from "next/head";
 import {useRouter} from "next/router";
 import {client} from "../../../graphql/apolloClient";
@@ -18,6 +18,13 @@ async function doMutation(cid, sid, abs, mAbs) {
 }
 
 export default function AddAbsences() {
+
+    useEffect(() => {
+        const token = localStorage.getItem('Token')
+        if (!token){
+            window.location.href = "/login"
+        }
+    }, [])
 
     const {cid, sid} = useRouter().query
 

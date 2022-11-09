@@ -20,7 +20,14 @@ async function getData(id) {
     return data.statsByGroup[0]
 }
 
-export default function ClassList() {
+export default function Stats() {
+
+    useEffect(() => {
+        const token = localStorage.getItem('Token')
+        if (!token){
+            window.location.href = "/login"
+        }
+    }, [])
 
     const {id} = useRouter().query
 
