@@ -155,16 +155,20 @@ query GetAppointment($id: String!){
   }
 }`;
 
-//TODO: Reemplazar por el query respectivo
 export const soapService = gql `
-query Stats($id: Int!){
-  statsByGroup(groupId: $id){
-    participation_percentage
-    approbation_percentage
-    average_grade
-    standard_deviation
-    best_grade
-    worst_grade
+query External($id: Int!){
+  consumeSubject(code: $id){
+    code
+    name
+    level
+    campus
+    vigency
+    credits
+    faculty
+    departament
+    academic_level
+    basic_academic_unit
+    content
   }
 }
 `

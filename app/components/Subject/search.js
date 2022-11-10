@@ -11,7 +11,7 @@ async function getData(id) {
             id: id
         }
     });
-    return data.statsByGroup
+    return data.consumeSubject
 }
 
 export default function Search() {
@@ -28,7 +28,7 @@ export default function Search() {
         credits: 0,
         campus: "",
         faculty: "",
-        department: "",
+        departament: "",
         basic_academic_unit: "",
         academic_level: "",
         content: []
@@ -61,25 +61,7 @@ export default function Search() {
                 onChange={changeForm}
                 onSubmit={e => {
                     e.preventDefault()
-                    getData(inputs.code).then(res => setOutput({
-                        ...output,
-                        code: inputs.code,
-                        name: "computacion cuantica",
-                        vigency: true,
-                        level: "posgrado",
-                        credits: 4,
-                        campus: "bogota",
-                        faculty: "ingenieria",
-                        department: "sistemas_industrial",
-                        basic_academic_unit: "sistemas",
-                        academic_level: "pregrado",
-                        content: [
-                            "imaginarios",
-                            "qubits arquitectónicos",
-                            "proyecto",
-                            "schrodingger y gobierno de tics"
-                        ]
-                    }))
+                    getData(inputs.code).then(res => setOutput(res))
                 }}
             >
                 <input  id="code"
@@ -163,7 +145,7 @@ export default function Search() {
                     <td className="border border-black bg-ac p-3 text-blue font-semibold">Departamento</td>
                     <td className="border border-black bg-g p-3">
                         {
-                            output.department
+                            output.departament
                         }
                     </td>
                 </tr>
